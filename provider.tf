@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "t3msp"                         # 공용 object strorage 의 이름 = t3msp 고정값
-    key    = "<< 개인 Knox Portal ID >>/mgmt/terraform.tfstate"  # ex) abc.123
+    key    = "jinyoung.son/mgmt/terraform.tfstate"  # ex) abc.123
     #endpoint = "https://obj1.kr-east-1.scp-in.com:8443"     # object storage가 생성된 private endpoint
     endpoint = "https://obj1.kr-east-1.samsungsdscloud.com:8443"     # object storage가 생성된 pub endpoint
     region = "None"

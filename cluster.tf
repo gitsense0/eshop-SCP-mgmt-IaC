@@ -11,18 +11,12 @@ data "scp_standard_image" "ubuntu_image_k8s" {
 }
 
 resource "scp_file_storage" "mgmt_nfs" {
-    product_names      = ["HDD"]
+    product_names      =  ["HDD","MultiAZ"]
     file_storage_name  = var.file_storage_name != "" ? var.file_storage_name : "eshop_mgmt_nfs"
     file_storage_protocol = "NFS"
     disk_type          = "HDD"
     service_zone_id    = var.service_zone_id
-    # name               = "eshop_svc_nfs"
-    # disk_type          = "HDD"
-    # protocol           = "NFS"
-    # is_encrypted       = true
-    # snapshot_frequency = "NONE"
-    # retention_count    = 0
-    # region             = var.region
+    multi_availability_zone  = true
 }
 
 resource "scp_load_balancer" "mgmt_lb" {
@@ -44,7 +38,7 @@ resource "scp_kubernetes_engine" "mgmt_cluster" {
 
     cloud_logging_enabled = false
     load_balancer_id   = scp_load_balancer.mgmt_lb.id
-    //depends_on         = [scp_file_storage.mgmt_nfs]
+    // depends_on         = [scp_file_storage.mgmt_nfs]
 }
 
 resource "scp_kubernetes_node_pool" "pool" {
